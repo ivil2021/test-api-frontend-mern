@@ -10,7 +10,7 @@ import './post.css';
 // Его использование особенно рекомендуется там, где производительность при работе с датами критична.
 //  Обычно это не на веб-страницах, а, к примеру, в разработке игр на JavaScript.
 
-const Post = ({name, password, title, text, viewsCount, id, createdAt, updatedAt, countTen, resCountTen, deletePostButtonHandler}) => {
+const Post = ({name, password, title, text, viewsCount, id, createdAt, updatedAt, countTen, resCountTen, deletePostButtonHandler, editPostButtonHandler}) => {
 //     Mongodb использует ISO8601 date/time формат (Z – значит UTC)
 // 2021-03-21T09:58:51.000Z
 
@@ -51,7 +51,15 @@ console.log(Date.parse(now.toJSON()) - dateInMiliseconds); // date in milisecond
             <p>{'countTen: ' + countTen}</p>
             <p>{'resCountTen: ' + resCountTen}</p>
             <p>{'createdAt: ' + createdAt}</p>
-            <button disabled={false}>Редактировать пост</button>
+            <button 
+                disabled={false} 
+                // onClick={() => editPostButtonHandler(id)}>Редактировать пост</button>
+                onClick={() => editPostButtonHandler(
+                    // {title: title, text: text, countTen: Number(countTen), id: id}                    
+                    // {title: title, text: text, id: id}                    
+                    // {title: title, text: text, id: id}  
+                    id
+                )}>Редактировать пост</button>
             <button disabled={false} onClick={() => deletePostButtonHandler(id)}>Удалить пост</button>
             {/* <p>{`updatedAt ${updatedAt}`}</p> */}
         </div>
@@ -59,3 +67,5 @@ console.log(Date.parse(now.toJSON()) - dateInMiliseconds); // date in milisecond
 }
 
 export default Post;
+
+// {title: postTitle, text: postText, countTen: Number(countTen), isUserLoggedIn: isUserLoggedIn, id: id}

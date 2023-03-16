@@ -144,6 +144,37 @@ function App() {
     return data;
   }
 
+  // editing post
+  const editPostButtonHandler = async (postId)  => {
+    console.log('edit post button was pushed');
+
+    // const data = await fetchEditPost({title: postTitle, text: postText, countTen: Number(countTen), isUserLoggedIn: !isUserLoggedIn});
+    const data = await fetchEditPost(postId);
+    // responseMessage = data.message;
+
+    console.log('-----data', data);
+  }
+
+  async function fetchEditPost(postId) {
+    // console.log('++++payloadForEdit: ', payloadForEdit);
+
+    const URL = `http://localhost:4444/posts/${postId}?isUserLoggedIn=${isUserLoggedIn}`;
+    const response = await fetch(URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': 'origin-list',
+        // 'Access-Control-Allow-Origin': 'http://localhost:3000/',
+      },
+      // body: JSON.stringify(payloadForEdit),
+      body: JSON.stringify({title: postTitle, text: postText}),
+    });
+    const data = await response.json();
+    console.log('====data AFTER edit POST:', data);
+
+    return data;
+  }
+
   return (
     <div className="app-wrapper">
       <h1>Test API frontend MERN</h1>
@@ -176,6 +207,7 @@ function App() {
             resCountTen={item.resCountTen}
             createdAt={item.createdAt}
             deletePostButtonHandler={deletePostButtonHandler}
+            editPostButtonHandler={editPostButtonHandler}
             />
         )
       })}
