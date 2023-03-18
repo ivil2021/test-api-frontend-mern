@@ -21,7 +21,8 @@ function App() {
   }, []);
 
   async function fetchGetAllPosts() {
-    const URL = 'http://localhost:4444/posts';
+    // const URL = 'http://localhost:4444/posts';
+    const URL = `${process.env.REACT_APP_API_URL}/posts`;
     const response = await fetch(URL, {
       method: 'GET',
       headers: {
@@ -60,7 +61,8 @@ function App() {
 
   // ADD A POST
   async function fetchAddPost(payload) {
-    const URL = `http://localhost:4444/posts/add?isUserLoggedIn=${isUserLoggedIn}`;
+    // const URL = `http://localhost:4444/posts/add?isUserLoggedIn=${isUserLoggedIn}`;
+    const URL = `${process.env.REACT_APP_API_URL}/posts/add?isUserLoggedIn=${isUserLoggedIn}`;
     const response = await fetch(URL, {
       method: 'POST',
       headers: {
@@ -86,7 +88,9 @@ function App() {
 
   // DELETE A POST
   async function fetchDeletePost(postId) {
-    const URL = `http://localhost:4444/posts/${postId}?isUserLoggedIn=${isUserLoggedIn}`;
+    // const URL = `http://localhost:4444/posts/${postId}?isUserLoggedIn=${isUserLoggedIn}`;
+    const URL = `${process.env.REACT_APP_API_URL}/posts/${postId}?isUserLoggedIn=${isUserLoggedIn}`;
+    
 
     const response = await fetch(URL, {
       method: 'DELETE',
@@ -102,7 +106,8 @@ function App() {
   };
 
   async function fetchEditPost(postId) {
-    const URL = `http://localhost:4444/posts/${postId}?isUserLoggedIn=${isUserLoggedIn}`;
+    // const URL = `http://localhost:4444/posts/${postId}?isUserLoggedIn=${isUserLoggedIn}`;
+    const URL = `${process.env.REACT_APP_API_URL}/posts/${postId}?isUserLoggedIn=${isUserLoggedIn}`;
 
     const response = await fetch(URL, {
       method: 'PUT',
