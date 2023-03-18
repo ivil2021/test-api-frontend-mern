@@ -1,6 +1,9 @@
+body {
+  background-color: lightgray;
+}
+
 .app-wrapper {
   padding-left: 10px;
-  background-color: lightgray;
 }
 
 button {
