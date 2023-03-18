@@ -10,11 +10,8 @@ const Post = ({name, password, title, text, viewsCount, id, createdAt, updatedAt
             <p>{'countTen: ' + countTen}</p>
             <p>{'resCountTen: ' + resCountTen}</p>
             <p>{'createdAt: ' + createdAt}</p>
-            <button 
-                disabled={false} 
-                onClick={() => editPostButtonHandler(id)}>Редактировать пост</button>
-            <button disabled={false} onClick={() => deletePostButtonHandler(id)}>Удалить пост</button>
-            {/* <p>{`updatedAt ${updatedAt}`}</p> */}
+            <button onClick={() => editPostButtonHandler(id)}>Редактировать пост</button>
+            <button onClick={() => deletePostButtonHandler(id)}>Удалить пост</button>
         </div>
     )
 }

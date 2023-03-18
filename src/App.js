@@ -1,46 +1,24 @@
 import React, { useState, useEffect } from 'react';
+
 import Post from './components/Post';
 import './App.css';
 
 function App() {
-  // const [text, setText] = useState('');
-  // const inputHandler = (event) => setText(event.target.value);
-
   const [postTitle, setPostTitle] = useState('');
   const [postText, setPostText] = useState('');
   const [countTen, setСountTen] = useState('');
   const [isUserLoggedIn, setIsUserLoggedIn] = useState('');
-
-  // const [userName, setUserName] = useState('');
   const [postsArray, setPostsArray] = useState([]);
+
   const postTitleHandler = (event) => setPostTitle(event.target.value);
   const postTextHandler = (event) => setPostText(event.target.value);
   const countTenHandler = (event) => setСountTen(event.target.value);
-  const isUserLoggedInHandler = (event) => {
-    setIsUserLoggedIn(event.target.value);
-  }
+  const isUserLoggedInHandler = (event) => setIsUserLoggedIn(event.target.value);
 
   // используем useEffect, чтобы автоматически загружались посты при загрузке страницы
   useEffect(() => {
     fetchGetAllPosts();
   }, []);
-
-  // ADD ONE USER
-  // async function fetchAddUser(payload) {
-  //   const URL = 'http://localhost:4444/auth/register';
-  //   const response = await fetch(URL, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       'Access-Control-Allow-Origin': 'origin-list',
-  //       // 'Access-Control-Allow-Origin': 'http://localhost:3000/',
-  //     },
-  //     body: JSON.stringify(payload),
-  //   });
-  //   const data = await response.json();
-
-  //   return data;
-  // }
 
   async function fetchGetAllPosts() {
     const URL = 'http://localhost:4444/posts';
@@ -53,9 +31,8 @@ function App() {
       },
       // body: JSON.stringify(payload),
     });
+
     const data = await response.json();
-    // console.log('data +++++++++++++++++: ', data);
-    // console.log('data.message +++++++++++++++++: ', data.message);
 
     if (data.message === 'Посты не найдены') {
       setPostsArray([]);
@@ -63,14 +40,9 @@ function App() {
       return;
     } else {
       setPostsArray([...data]);
-      // console.log('Ответ сервера после операции редактирования поста:', data);
       console.log('Ответ сервера:', data);
       console.log('Все посты получены');
     }
-
-    // console.log('Все посты получены');
-
-    // return data;
   }
 
   const getAllPostsButtonHandler = async () => {
@@ -78,24 +50,16 @@ function App() {
   };
 
   const addPostButtonHandler = async () => {
-    // const data = await fetchAddPost({title: postTitle, text: postText, countTen: Number(countTen), isUserLoggedIn: !isUserLoggedIn});
     await fetchAddPost({
       title: postTitle,
       text: postText,
       countTen: Number(countTen),
       isUserLoggedIn: !isUserLoggedIn,
     });
-    // console.log('*****data from add post: ', data);
-    // console.log('*****data.message: ', data.message);
-    // responseMessage = data.message;
-    // console.log('*****responseMessage: ', responseMessage);
-
-    // console.log('-----aaa', aaa);
   };
 
   // ADD A POST
   async function fetchAddPost(payload) {
-    // console.log('++--**payload:', payload);
     const URL = `http://localhost:4444/posts/add?isUserLoggedIn=${isUserLoggedIn}`;
     const response = await fetch(URL, {
       method: 'POST',
@@ -107,9 +71,7 @@ function App() {
       body: JSON.stringify(payload),
     });
     const data = await response.json();
-    // console.log('Ответ сервера после операции добавления поста:', data);
     console.log('Ответ сервера:', data);
-    // console.log('+++response:', response);
 
     if (response.status === 200) {
       console.log('Пост успешно добавлен');
@@ -131,11 +93,7 @@ function App() {
     });
 
     const data = await response.json();
-    // console.log('Ответ сервера после операции удаления поста:', data);
     console.log('Ответ сервера:', data);
-    // console.log('Пост успешно удален');
-
-    // return data;
   }
 
   // editing post
@@ -158,8 +116,6 @@ function App() {
 
     const data = await response.json();
     console.log('Ответ сервера:', data);
-    // console.log('Пост успешно обновлен');
-    // return data;
   }
 
   return (
@@ -182,7 +138,6 @@ function App() {
       <button className="button" onClick={getAllPostsButtonHandler}>Получить все посты</button>
 
       {postsArray.map((item) => {
-        // console.log('item===', item)
         return (
           <Post
             key={item.index}
